@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://PopupShaderDialog.gd" type="Script" id=1]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -35,29 +35,21 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="Main" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 1.25992
-margin_bottom = 1.25989
+[node name="PopupShaderDialog" type="PopupDialog"]
+material = SubResource( 2 )
+margin_right = 271.0
+margin_bottom = 111.0
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PopupDialog" type="PopupDialog" parent="."]
-visible = true
-material = SubResource( 2 )
-margin_right = 334.0
-margin_bottom = 166.0
-custom_styles/panel = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="PopupDialog"]
+[node name="Margin" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -134.0
+size_flags_vertical = 5
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -66,23 +58,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="VBoxContainer" parent="PopupDialog/MarginContainer"]
+[node name="HBox" type="VBoxContainer" parent="Margin"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 314.0
-margin_bottom = 146.0
+margin_right = 251.0
+margin_bottom = 88.0
+size_flags_vertical = 2
 custom_constants/separation = 20
 
-[node name="Label" type="Label" parent="PopupDialog/MarginContainer/HBoxContainer"]
-margin_right = 294.0
+[node name="Title" type="Label" parent="Margin/HBox"]
+margin_right = 231.0
 margin_bottom = 14.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Hello"
+custom_colors/font_color = Color( 0.607843, 0.733333, 0.623529, 1 )
+text = "Title"
 
-[node name="Label2" type="Label" parent="PopupDialog/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Margin/HBox"]
 margin_top = 34.0
-margin_right = 294.0
-margin_bottom = 65.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello "
+margin_right = 231.0
+margin_bottom = 34.0
+
+[node name="Content" type="Label" parent="Margin/HBox"]
+margin_top = 54.0
+margin_right = 231.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0.121569, 0.121569, 0.121569, 1 )
+text = "Content"
 autowrap = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
