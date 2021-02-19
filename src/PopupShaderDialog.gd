@@ -21,10 +21,14 @@ func open(title := "Title", content := "The content", timeout := 3.0):
 	$Timer.start(timeout)
 
 
-func _on_Timer_timeout():
+func close():
 	hide()
 	$Margin/HBox/Title.text = ""
 	$Margin/HBox/Content.text = ""
 	get_child(0).rect_size.y = y_size
 	rect_size.y = y_size
 	emit_signal("closed")
+
+
+func _on_Timer_timeout():
+	close()
